@@ -1,0 +1,80 @@
+﻿@model PVBClothing.Models.Member
+
+@{
+    ViewBag.Title = "Register";
+}
+
+@using (Html.BeginForm("Register", "User", FormMethod.Post, new { @id = "form-register" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="register-form">
+        <div class="row">
+            <div class="col-md-6">
+                <label>First Name</label>
+                <input class="form-control" type="text" placeholder="First Name" id="firstname">
+                <span class="form-message"></span>
+            </div>
+            <div class="col-md-6">
+                <label>Last Name"</label>
+                <input class="form-control" type="text" placeholder="Last Name" id="lastname">
+                <span class="form-message"></span>
+            </div>
+            <div class="col-md-6">
+                <label>E-mail</label>
+                <input class="form-control" type="text" placeholder="E-mail" id="email">
+                <span class="form-message"></span>
+            </div>
+            <div class="col-md-6">
+                <label>Mobile No</label>
+                <input class="form-control" type="text" placeholder="Mobile No" id="phone">
+                <span class="form-message"></span>
+            </div>
+            <div class="col-md-6">
+                <label>Address</label>
+                <input class="form-control" type="text" placeholder="Address" id=" address">
+                <span class="form-message"></span>
+            </div>
+            <div class="col-md-6">
+                <label>Password</label>
+                <input class="form-control" type="text" placeholder="Password" id="password">
+                <span class="form-message"></span>
+            </div>
+            <div class="col-md-6">
+                <label>Retype Password</label>
+                <input class="form-control" type="text" placeholder="Password" id="confirmpassword">
+                @ViewData["InputconfirmPassword"]
+                @ViewData["confirmPassword"]
+                <span class="form-message"></span>
+            </div>
+
+            <div class="col-md-12">
+                <button class="btn">Submit</button>
+            </div>
+        </div>
+    </div>
+}
+
+<script src="~/Content/js/validator.js"></script>
+<script>
+    Validator({
+        form: 'form-register',
+        formGroupSelector: '.col-md-6',
+        errorSelector: '.form-message',
+        rules: [
+            Validator.isRequired('#email'),
+            Validator.isRequired('#password'),
+            Validator.isRequired('#firstname'),
+            Validator.isRequired('#lastname'),
+            Validator.isRequired('#confirmpassword'),
+            Validator.isRequired('#phone'),
+            Validator.isRequired('#address'),
+
+
+
+
+
+        ],
+    });
+</script>
+

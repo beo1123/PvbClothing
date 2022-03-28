@@ -1,0 +1,186 @@
+﻿@model PVBClothing.Models.Member
+
+@{
+    ViewBag.Title = "Login";
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb Start -->
+<div class="breadcrumb-wrap">
+    <div class="container-fluid">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+
+            <li class="breadcrumb-item active">Login & Register</li>
+        </ul>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+<!-- Login Start -->
+<div class="login">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+                @using (Html.BeginForm("Register", "User", FormMethod.Post, new { @id = "form-register" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="register-form">
+                        <h5 style="color: red">@TempData["msgSuccess"]</h5>
+                        <h5 style="color: red">@TempData["msgFailed"]</h5>
+                        <h5 style="color: red">@TempData["msgEmailAlreadyExist"]</h5>
+
+                        <div class="row">
+
+
+                            <div class="col-md-6">
+
+                                <label>First Name</label>
+                                <input class="form-control" type="text" placeholder="First Name" id="firstname" name="firstName">
+                                @Html.ValidationMessageFor(model => model.firstName, "", new { @class = "text-danger" })
+                                <span class="form-message"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Last Name</label>
+                                <input class="form-control" type="text" placeholder="Last Name" id="lastname" name="lastName">
+                                @Html.ValidationMessageFor(model => model.lastName, "", new { @class = "text-danger" })
+
+                                <span class="form-message"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label>E-mail</label>
+                                <input class="form-control" type="text" placeholder="E-mail" id="email" name="userName">
+                                @Html.ValidationMessageFor(model => model.userName, "", new { @class = "text-danger" })
+
+                                <span class="form-message"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Mobile No</label>
+                                <input class="form-control" type="text" placeholder="Mobile No" id="phone" name="phone">
+                                @Html.ValidationMessageFor(model => model.phone, "", new { @class = "text-danger" })
+
+                                <span class="form-message"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Address</label>
+                                <input class="form-control" type="text" placeholder="Address" id="address" name="address">
+                                @Html.ValidationMessageFor(model => model.address, "", new { @class = "text-danger" })
+
+                                <span class="form-message"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Password</label>
+                                <input class="form-control" type="password" placeholder="Password" id="password" name="password">
+                                @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+
+                                <span class="form-message"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Retype Password</label>
+                                <input class="form-control" type="password" placeholder="Confirm password" id="password_confirmation" name="confirm">
+
+
+                                <span class="form-message"></span>
+                            </div>
+
+                            <div class="col-md-12">
+                                <button class="btn">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+            <div class="col-lg-6">
+                @using (Html.BeginForm("Login", "User", FormMethod.Post, new { @id = "form-login" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="login-form">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>E-mail / Username</label>
+                                <input class="form-control" type="text" placeholder="E-mail / Username" id="username" name="username">
+                                @Html.ValidationMessageFor(m => m.userName, "", new { @class = "badge badge-danger" })
+                                <span class="form-message"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Password</label>
+                                <input class="form-control" type="password" placeholder="Password" id="passwordLogin" name="password">
+                                @Html.ValidationMessageFor(m => m.password, "", new { @class = "badge badge-danger" })
+                                <span class="form-message"></span>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="newaccount">
+                                    <label class="custom-control-label" for="newaccount">Keep me signed in</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <button class="btn">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+        $('form[action = "/User/Login"]').submit(function (e) {
+            e.preventDefault();
+            $.post('/User/Login', $(this).serialize(), (r) => {
+                alert(r.msg);
+                window.location.href = r.Url;
+            })
+        })
+    </script>
+}
+
+<script src="~/Content/js/validator.js"></script>
+
+<script>
+
+    Validator({
+        form: '#form-login',
+        formGroupSelector: '.col-md-6',
+        errorSelector: '.form-message',
+        rules: [
+            Validator.isRequired('#username'),
+            Validator.isRequired('#passwordLogin'),
+
+
+        ],
+    });
+
+</script>
+<script src="~/Content/js/validator.js"></script>
+
+<script>
+    Validator({
+        form: '#form-register',
+        formGroupSelector: '.col-md-6',
+        errorSelector: '.form-message',
+        rules: [
+            Validator.isRequired('#firstname'),
+            Validator.isRequired('#lastname'),
+            Validator.isRequired('#email'),
+            Validator.isRequired('#address'),
+            Validator.isRequired('#phone'),
+            Validator.minLength('#password', 6),
+            Validator.isRequired('#password_confirmation'),
+            Validator.isConfirmed('#password_confirmation', function () {
+                return document.querySelector('#form-register #password').value;
+            }, 'Passwords must match')
+
+        ],
+    });
+</script>
+
+
+<!-- Login End -->

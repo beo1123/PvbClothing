@@ -1,0 +1,103 @@
+﻿@using PVBClothing.Models
+@model List<Cart>
+
+
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb Start -->
+<div class="breadcrumb-wrap">
+    <div class="container-fluid">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Products</a></li>
+            <li class="breadcrumb-item active">Checkout</li>
+        </ul>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+<!-- Checkout Start -->
+<div class="checkout">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="checkout-inner">
+                    <div class="billing-address">
+                        <h2>Billing Address</h2>
+                        @{ Member user = (Member)Session["info"]; }
+                        @using (Html.BeginForm("Checkout", "Cart", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>First Name<span>*</span></label>
+                                    <input class="form-control" type="text" placeholder="First Name" value="@user.firstName" >
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Last Name<span>*</span></label>
+                                    <input class="form-control" type="text" placeholder="Last Name" value="@user.lastName" >
+                                </div>
+                                <div class="col-md-6">
+                                    <label>E-mail<span>*</span></label>
+                                    <input class="form-control" type="text" placeholder="E-mail" value="@user.email" >
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Mobile No<span>*</span></label>
+                                    <input class="form-control" type="text" placeholder="Mobile No" value="@user.phone" >
+                                </div>
+                                <div class="col-md-12">
+                                    <label>Address<span>*</span></label>
+                                    <input class="form-control" type="text" placeholder="Address" value="@user.address" >
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="submit" class="site-btn order-button">SUBMIT ORDER</button>
+
+                                </div>
+                                <div class="col-md-6">
+
+                                    <a href="@Url.Action("PaymentWithPaypal","Cart")" class="paypal-button"><img src="~/Content/img/Orders/paypalicon.svg" /><img src="~/Content/img/Orders/paypalcontent.svg" width="20%" /></a>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="checkout-inner">
+                    <div class="checkout-summary">
+                        <h1>Cart Total</h1>
+                        <table cellpadding="5">
+                            <tr>
+                                <th width="80%">Product</th>
+                                <th width="20%" style="text-align: center; ">Total</th>
+                            </tr>
+                            @{
+                                int num = 1;
+                            }
+                            @foreach (var i in Model)
+                            {
+                                <tr>
+                                    <td>@num. @i.NameItem</td>
+                                    <td style=" position: relative; left: 11px;"><span>$@String.Format("{0:0,0}", i.PriceTotal)</span></td>
+                                </tr>
+                                num++;
+                            }
+
+                        </table>
+
+                        <h2>Grand Total<span>$@String.Format("{0:0,0}", ViewBag.totalPrice)</span></h2>
+                    </div>
+
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Checkout End -->

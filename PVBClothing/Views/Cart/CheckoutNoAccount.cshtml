@@ -1,0 +1,149 @@
+﻿@using PVBClothing.Models
+@model List<Cart>
+
+@{
+    ViewBag.Title = "CheckoutNoAccount";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb Start -->
+<div class="breadcrumb-wrap">
+    <div class="container-fluid">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Products</a></li>
+            <li class="breadcrumb-item active">Checkout</li>
+        </ul>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+<!-- Checkout Start -->
+<div class="checkout">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="checkout-inner">
+                    <div class="billing-address">
+                        <h2>Billing Address</h2>
+
+                        @using (Html.BeginForm("CheckoutNoAccount", "Cart", FormMethod.Post, new { @id = "form-1" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="checkout__input">
+                                        <label>First Name</label>
+                                        <input class="form-control" type="text" placeholder="First Name" name="firstName" id="firstName">
+                                        <span class="form-message"></span>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="checkout__input">
+                                        <label>Last Name</label>
+                                        <input class="form-control" type="text" placeholder="Last Name" name="lastName" id="lastName">
+                                        <span class="form-message"></span>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="checkout__input">
+                                        <label>E-mail</label>
+                                        <input class="form-control" type="text" placeholder="E-mail" name="email" id="email">
+                                        <span class="form-message"></span>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="checkout__input">
+                                        <label>Mobile No</label>
+                                        <input class="form-control" type="text" placeholder="Mobile No" name="phone" id="phone">
+                                        <span class="form-message"></span>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="checkout__input">
+                                        <label>Address</label>
+                                        <input class="form-control" type="text" placeholder="Address" name="address" id="address">
+                                        <span class="form-message"></span>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="submit" class="site-btn order-button">SUBMIT ORDER</button>
+
+                                </div>
+                                <div class="col-md-6">
+
+                                    <a href="@Url.Action("PaymentWithPaypal","Cart")" class="paypal-button"><img src="~/Content/img/Orders/paypalicon.svg" /><img src="~/Content/img/Orders/paypalcontent.svg" width="20%" /></a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="~/User/Register" class="checkout-account">Create an account?</a>
+                                </div>
+
+                            </div>
+
+
+                        }
+
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="checkout-inner">
+                    <div class="checkout-summary">
+                        <h1>Cart Total</h1>
+                        <table cellpadding="5">
+                            <tr>
+                                <th width="80%">Product</th>
+                                <th width="20%" style="text-align: center; ">Total</th>
+                            </tr>
+                            @{
+                                int num = 1;
+                            }
+                            @foreach (var i in Model)
+                            {
+                                <tr>
+                                    <td>@num. @i.NameItem</td>
+                                    <td style=" position: relative; left: 11px;"><span>$ @String.Format("{0:0,0}", i.PriceTotal)</span></td>
+                                </tr>
+                                num++;
+                            }
+
+                        </table>
+
+                        <h2>Grand Total<span>$@String.Format("{0:0,0}", ViewBag.totalPrice)</span></h2>
+
+                    </div>
+
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Content/js/validator.js"></script>
+<script>
+    Validator({
+        form: '#form-1',
+        formGroupSelector: '.checkout__input',
+        errorSelector: '.form-message',
+        rules: [
+            Validator.isRequired('#firstName'),
+            Validator.isRequired('#lastName'),
+            Validator.isEmail('#email'),
+            Validator.isRequired('#address'),
+            Validator.isRequired('#phone'),
+        ],
+    });
+</script>
+

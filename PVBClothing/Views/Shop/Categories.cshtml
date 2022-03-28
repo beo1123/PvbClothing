@@ -1,0 +1,8 @@
+﻿@using PVBClothing.Models
+@model List<ProductCategory>
+
+@foreach (var i in Model)
+{
+    <li class="nav-item" ><a class="nav-link" href="#">@Html.ActionLink(i.categoryName, "ProductList", "Shop", new { categories = i.categoryId }, null)</a></li>
+}
+

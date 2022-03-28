@@ -1,0 +1,119 @@
+﻿@model IEnumerable<PVBClothing.Models.Cart>
+
+
+
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb Start -->
+<div class="breadcrumb-wrap">
+    <div class="container-fluid">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Products</a></li>
+            <li class="breadcrumb-item active">Cart</li>
+        </ul>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+<!-- Cart Start -->
+<div class="cart-page">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="cart-page-inner">
+                    @using (Html.BeginForm(("UpdateCart", "Cart")))
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Price</th>
+                                        <th>Quantity</th>
+                                        <th>Total</th>
+                                        <th>Remove</th>
+
+
+                                    </tr>
+                                </thead>
+
+                                <tbody class="align-middle">
+                                    @foreach (var i in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <div class="img">
+                                                    <img src="@Url.Content(i.ImageItem)" alt="Product Image">
+                                                    <a href="@Url.Action("ShopDetail", "Shop", new { id = i.IdItem })"><p>@i.NameItem</p></a>
+                                                </div>
+                                            </td>
+
+                                            <td>$@String.Format("{0:0,0}", i.PriceItem)</td>
+                                            <td>
+                                                <div class="qty">
+
+
+                                                    <input type="number" min="1" name="quanlity" value="@i.Quantity">
+
+
+                                                </div>
+                                            </td>
+                                            <td>$@String.Format("{0:0,0}", i.PriceTotal)</td>
+                                            <td><a href="@Url.Action("DeteteCart", "Cart", new { id = i.IdItem })"><i class="fa fa-trash"></i></a></td>
+
+
+                                        </tr>
+                                    }
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+                        <button type="submit"><i class="fa fa-spinner"></i> Update cart</button>
+
+                    }
+                </div>
+
+            </div>
+
+            <div class="col-lg-4">
+                <div class="cart-page-inner">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="coupon">
+                                <input type="text" placeholder="Coupon Code">
+                                <button>Apply Code</button>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="cart-summary">
+                                <div class="cart-content">
+                                    <h1>Cart Summary</h1>
+                                    <h2>Grand Total<span>$@String.Format("{0:0,0}", ViewBag.totalPrice)</span></h2>
+                                </div>
+                                <div class="cart-btn">
+                                    @if (Session["info"] != null)
+                                    {
+                                        <a href="@Url.Action("Checkout","Cart")" class="primary-btn">Proceed to checkout</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("CheckoutNoAccount","Cart")" class="primary-btn">Proceed to checkout</a>
+                                    }
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Cart End -->
