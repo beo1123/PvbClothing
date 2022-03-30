@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PVBClothing.Models;
+using PayPal.Api;
 
 namespace PVBClothing.Controllers
 {
@@ -357,6 +358,163 @@ namespace PVBClothing.Controllers
             Session.Remove("Cart");
             //Session["Cart"] = null;
             return RedirectToAction("Index", "Home");
+        }
+
+        // Paypal 
+        private Payment payment;
+        private Payment CreatePayment(APIContext apiContext, string redirectUrl)
+        {
+            var listItems = new ItemList() { items = new List<Item>() };
+            List<Cart> listCart = getCart();
+            foreach (var cart in listCart)
+            {
+                listItems.items.Add(new Item()
+                {
+                    name = cart.NameItem,
+                    currency = "USD",
+                    price = cart.PriceItem.ToString(),
+                    quantity = cart.Quantity.ToString(),
+                    sku = "sku"
+                });
+            }
+
+            var payer = new Payer() { payment_method = "paypal" };
+
+            var redirUrls = new RedirectUrls()
+            {
+                cancel_url = redirectUrl,
+                return_url = redirectUrl
+            };
+
+            var details = new Details()
+            {
+                tax = "0",
+                shipping = "0",
+                subtotal = listCart.Sum(model => model.Quantity * model.PriceItem).ToString()
+            };
+
+            var amount = new Amount()
+            {
+                currency = "USD",
+                total = (Convert.ToDouble(details.tax) + Convert.ToDouble(details.shipping) + Convert.ToDouble(details.subtotal)).ToString(), // tax + shipping + subtotal
+                details = details
+            };
+
+            var transactionList = new List<Transaction>();
+            transactionList.Add(new Transaction()
+            {
+                description = "Menfashion transaction description",
+                invoice_number = Convert.ToString((new Random()).Next(100000)),
+                amount = amount,
+                item_list = listItems
+            });
+
+            payment = new Payment()
+            {
+                intent = "sale",
+                payer = payer,
+                transactions = transactionList,
+                redirect_urls = redirUrls
+            };
+
+            return payment.Create(apiContext);
+        }
+        private Payment ExecutePayment(APIContext apiContext, string payerId, string paymentId)
+        {
+            var paymentExecution = new PaymentExecution()
+            {
+                payer_id = payerId
+            };
+            payment = new Payment() { id = paymentId };
+            return payment.Execute(apiContext, paymentExecution);
+        }
+        public ActionResult PaymentWithPaypal()
+        {
+            APIContext apiContext = PaypalConfiguration.GetAPIContext();
+
+            try
+            {
+                string payerId = Request.Params["PayerID"];
+                if (string.IsNullOrEmpty(payerId))
+                {
+                    string baseURL = Request.Url.Scheme + "://" + Request.Url.Authority + "/Cart/PaymentWithPaypal?";
+                    var guid = Convert.ToString((new Random()).Next(100000));
+                    var createdPayment = CreatePayment(apiContext, baseURL + "guid=" + guid);
+
+                    var links = createdPayment.links.GetEnumerator();
+                    string paypalRedirectUrl = string.Empty;
+
+                    while (links.MoveNext())
+                    {
+                        Links link = links.Current;
+                        if (link.rel.ToLower().Trim().Equals("approval_url"))
+                        {
+                            paypalRedirectUrl = link.href;
+                        }
+                    }
+
+                    Session.Add(guid, createdPayment.id);
+                    return Redirect(paypalRedirectUrl);
+                }
+                else
+                {
+                    var guid = Request.Params["guid"];
+                    var executedPayment = ExecutePayment(apiContext, payerId, Session[guid] as string);
+                    if (executedPayment.state.ToLower() != "approved")
+                    {
+                        Session.Remove("Cart");
+                        return RedirectToAction("Error", "Home");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                PaypalLogger.Log("Error: " + ex.Message);
+                Session.Remove("Cart");
+                return RedirectToAction("Error", "Home");
+            }
+
+
+            Member member = (Member)Session["info"];
+            if (member != null) // Nếu đã đăng nhập thì lấy thông tin thành viên trong session info
+            {
+                Invoince bill = new Invoince();
+                List<Cart> listCart = getCart();
+                bill.invoinceNo = CreateKey("HD");
+                bill.userName = member.userName;
+                bill.dateOrder = DateTime.Now;
+                bill.status = true;
+                bill.deliveryDate = null;
+                bill.deliveryStatus = false;
+                // Biến totalmoney lưu tổng tiền sản phẩm từ giỏ hàng
+                int totalmoney = 0;
+                foreach (var item in listCart)
+                {
+                    totalmoney += Convert.ToInt32(item.PriceTotal);
+                }
+                bill.totalMoney = totalmoney;
+                db.Invoinces.Add(bill);
+                db.SaveChanges();
+                foreach (var item in listCart)
+                {
+                    InvoinceDetail ctdh = new InvoinceDetail();
+                    ctdh.invoinceNo = bill.invoinceNo;
+                    ctdh.productId = item.IdItem;
+                    ctdh.quanlityProduct = item.Quantity;
+                    ctdh.unitPrice = item.unitPrice;
+                    ctdh.totalPrice = (int?)(long)item.PriceTotal;
+                    ctdh.totalDiscount = item.Discount * item.Quantity;
+                    db.InvoinceDetails.Add(ctdh);
+                }
+                db.SaveChanges();
+                return RedirectToAction("SubmitBill", "Cart");
+            }
+            else
+            {
+                // Xử lí dữ liệu khách hàng nhập
+                //Session.Remove("Cart");
+                return RedirectToAction("SubmitBill", "Cart");
+            }
         }
 
     }

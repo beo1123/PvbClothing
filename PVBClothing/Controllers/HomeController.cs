@@ -108,5 +108,77 @@ namespace PVBClothing.Controllers
         }
 
 
+        [HttpGet]
+        public ActionResult ChangePassword(string userName)
+        {
+            Member member = db.Members.Find(userName);
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ChangePassword(Member member, FormCollection collection)
+        {
+            try
+            {
+                var CurrentPassword = collection["CurPassword"]; // Mật khẩu hiện tại
+                var NewPassword = collection["NewPassword"]; // Mật khẩu mới
+                //var ConfirmPassword = collection["Confirm"];
+
+                CurrentPassword = CurrentPassword.Trim();
+                NewPassword = NewPassword.Trim();
+
+                var check = db.Members.Where(model => model.password == CurrentPassword && model.userName == member.userName).FirstOrDefault();
+                if (check != null)
+                {
+                    check.password = NewPassword;
+                    db.SaveChanges();
+                    TempData["msgChangePassword"] = "Successfully change password!";
+                    return RedirectToAction("index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Incorrect your password!");
+                    return View(member);
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["msgChangePasswordFailed"] = "Edit failed! " + ex.Message;
+                return RedirectToAction("Index");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult MyOrder(string userName)
+        {
+            var orders = db.Invoinces.OrderByDescending(model => model.dateOrder).Where(model => model.userName == userName).ToList();
+            return View(orders);
+        }
+        [HttpGet]
+        public ActionResult InvoinceDetail(string invoinceNo)
+        {
+            var detail = db.InvoinceDetails.Where(model => model.invoinceNo == invoinceNo).Include(model => model.Product).ToList();
+            var infor = db.Invoinces.Where(model => model.invoinceNo == invoinceNo).Include(model => model.Member).FirstOrDefault();
+            ViewBag.invoinceNo = invoinceNo;
+            Session["information"] = infor;
+
+            return View(detail);
+        }
+
+        public ActionResult Delete(string id)
+        {
+            List<InvoinceDetail> ctdh = db.InvoinceDetails.Where(model => model.invoinceNo == id).ToList();
+            foreach (var i in ctdh)
+            {
+                db.InvoinceDetails.Remove(i);
+            }
+            db.SaveChanges();
+            Invoince invoince = db.Invoinces.Find(id);
+            db.Invoinces.Remove(invoince);
+            TempData["msgDeleteOrder"] = "Successfully delete order!";
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+
     }
 }
