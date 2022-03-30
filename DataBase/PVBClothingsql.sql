@@ -232,3 +232,7 @@ SELECT *
 FROM dbo.Invoince
 WHERE DATEPART(day,dateOrder) = DATEPART(day,getdate())
 GO
+
+select * from Invoince
+
+select * from Customer

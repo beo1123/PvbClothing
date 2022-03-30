@@ -94,18 +94,19 @@
                             {
 
                                 <span class="nav-link dropdown-toggle" data-toggle="dropdown">Hi!, @Session["FullName"].ToString()</span>
+
                                 @*<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Hi!, @Session["FullName"].ToString()</a>*@
-                        <div class="dropdown-menu">
-                            <a href="@Url.Action("EditProfie", "Home", new { userName = user.userName })" class="dropdown-item">Edit Profile</a>
-                            <a href="@Url.Action("MyOrder", "Home", new { userName = user.userName })" class="dropdown-item">My Order</a>
-                            <a href="@Url.Action("ChangePassword", "Home", new { userName = user.userName })" class="dropdown-item">Change Password</a>
+                                <div class="dropdown-menu">
+                                    <a href="@Url.Action("EditProfie", "Home", new { userName = user.userName })" class="dropdown-item">Edit Profile</a>
+                                    <a href="@Url.Action("MyOrder", "Home", new { userName = user.userName })" class="dropdown-item">My Order</a>
+                                    <a href="@Url.Action("ChangePassword", "Home", new { userName = user.userName })" class="dropdown-item">Change Password</a>
 
 
 
-                            <a href="@Url.Action("logout", "User")" class="dropdown-item">logout</a>
+                                    <a href="@Url.Action("logout", "User")" class="dropdown-item">logout</a>
 
 
-                        </div>
+                                </div>
                             }
 
                         </div>
