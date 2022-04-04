@@ -403,7 +403,7 @@ namespace PVBClothing.Controllers
             var transactionList = new List<Transaction>();
             transactionList.Add(new Transaction()
             {
-                description = "Menfashion transaction description",
+                description = "PVBClothing transaction description",
                 invoice_number = Convert.ToString((new Random()).Next(100000)),
                 amount = amount,
                 item_list = listItems

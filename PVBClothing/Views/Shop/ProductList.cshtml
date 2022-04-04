@@ -9,8 +9,8 @@
 <div class="breadcrumb-wrap">
     <div class="container-fluid">
         <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Products</a></li>
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Home</a></li>
+            <li class="breadcrumb-item"><a href="@Url.Action("ProductList", "Shop")">Products</a></li>
             <li class="breadcrumb-item active">Product List</li>
         </ul>
     </div>
@@ -25,50 +25,51 @@
                     <div class="col-md-12">
                         <div class="product-view-top">
                             <div class="row">
-                                @using (Html.BeginForm("ProductList", "Shop", FormMethod.Get, new { @style = "display: flex; align-items: center;" }))
-                                {
-                                    <div class="col-md-4">
+                                <div class="col-md-4">
+                                    @using (Html.BeginForm("ProductList", "Shop", FormMethod.Get, new { @style = "display: flex; align-items: center;" }))
+                                    {
                                         <div class="product-search">
 
-                                            <input type="text" value="Search">
-                                            <button><i class="fa fa-search"></i></button>
-
+                                            <input type="text" placeholder="Search..." name="searching">
+                                            <button type="submit"><i class="fa fa-search"></i></button>
 
 
                                         </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="product-short">
-                                            <div class="dropdown">
-                                                <div class="dropdown-toggle" data-toggle="dropdown">Product short by</div>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a href="#" class="dropdown-item">Newest</a>
-                                                    <a href="#" class="dropdown-item">Popular</a>
-                                                    <a href="#" class="dropdown-item">Most sale</a>
-                                                </div>
+                                    }
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="product-short">
+                                        <div class="dropdown">
+                                            <div class="dropdown-toggle" data-toggle="dropdown">Product short by</div>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a href="#" class="dropdown-item">Newest</a>
+                                                <a href="#" class="dropdown-item">Popular</a>
+                                                <a href="#" class="dropdown-item">Most sale</a>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="product-price-range">
-                                            <div class="dropdown">
-                                                <div class="dropdown-toggle" data-toggle="dropdown">Product price range</div>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a href="#" class="dropdown-item">$0 to $50</a>
-                                                    <a href="#" class="dropdown-item">$51 to $100</a>
-                                                    <a href="#" class="dropdown-item">$101 to $150</a>
-                                                    <a href="#" class="dropdown-item">$151 to $200</a>
-                                                    <a href="#" class="dropdown-item">$201 to $250</a>
-                                                    <a href="#" class="dropdown-item">$251 to $300</a>
-                                                    <a href="#" class="dropdown-item">$301 to $350</a>
-                                                    <a href="#" class="dropdown-item">$351 to $400</a>
-                                                    <a href="#" class="dropdown-item">$401 to $450</a>
-                                                    <a href="#" class="dropdown-item">$451 to $500</a>
-                                                </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="product-price-range">
+                                        <div class="dropdown">
+                                            <div class="dropdown-toggle" data-toggle="dropdown">Product price range</div>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a href="#" class="dropdown-item">$0 to $50</a>
+                                                <a href="#" class="dropdown-item">$51 to $100</a>
+                                                <a href="#" class="dropdown-item">$101 to $150</a>
+                                                <a href="#" class="dropdown-item">$151 to $200</a>
+                                                <a href="#" class="dropdown-item">$201 to $250</a>
+                                                <a href="#" class="dropdown-item">$251 to $300</a>
+                                                <a href="#" class="dropdown-item">$301 to $350</a>
+                                                <a href="#" class="dropdown-item">$351 to $400</a>
+                                                <a href="#" class="dropdown-item">$401 to $450</a>
+                                                <a href="#" class="dropdown-item">$451 to $500</a>
                                             </div>
                                         </div>
                                     </div>
-                                }
+                                </div>
+
 
                             </div>
                         </div>
@@ -77,7 +78,7 @@
 
                 </div>
 
-               
+
             </div>
 
             <!-- Side Bar Start -->
@@ -86,8 +87,8 @@
                     <h2 class="title">Category</h2>
                     <nav class="navbar bg-light">
                         <ul class="navbar-nav">
-                        @Html.Action("Categories", "Shop")
-                           
+                            @Html.Action("Categories", "Shop")
+
                         </ul>
                     </nav>
                 </div>
@@ -106,23 +107,23 @@
                     </ul>
                 </div>
 
-               
-            <!-- Side Bar End -->
+
+                <!-- Side Bar End -->
+            </div>
         </div>
     </div>
-</div>
-<!-- Product List End -->
-<!-- Brand Start -->
-<div class="brand">
-    <div class="container-fluid">
-        <div class="brand-slider">
-            <div class="brand-item"><img src="img/brand-1.png" alt=""></div>
-            <div class="brand-item"><img src="img/brand-2.png" alt=""></div>
-            <div class="brand-item"><img src="img/brand-3.png" alt=""></div>
-            <div class="brand-item"><img src="img/brand-4.png" alt=""></div>
-            <div class="brand-item"><img src="img/brand-5.png" alt=""></div>
-            <div class="brand-item"><img src="img/brand-6.png" alt=""></div>
+    <!-- Product List End -->
+    <!-- Brand Start -->
+    <div class="brand">
+        <div class="container-fluid">
+            <div class="brand-slider">
+                <div class="brand-item"><img src="img/brand-1.png" alt=""></div>
+                <div class="brand-item"><img src="img/brand-2.png" alt=""></div>
+                <div class="brand-item"><img src="img/brand-3.png" alt=""></div>
+                <div class="brand-item"><img src="img/brand-4.png" alt=""></div>
+                <div class="brand-item"><img src="img/brand-5.png" alt=""></div>
+                <div class="brand-item"><img src="img/brand-6.png" alt=""></div>
+            </div>
         </div>
     </div>
-</div>
-<!-- Brand End -->
+    <!-- Brand End -->

@@ -76,7 +76,6 @@
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">More Pages</a>
                             <div class="dropdown-menu">
                                 <a href="wishlist.html" class="dropdown-item">Wishlist</a>
-                                <a href="@Url.Action("Login", "User")" class="dropdown-item">Login & Register</a>
                                 <a href="@Url.Action("Contact", "Home")" class="dropdown-item">Contact Us</a>
                             </div>
                         </div>
@@ -122,16 +121,16 @@
             <div class="row align-items-center">
                 <div class="col-md-3">
                     <div class="logo">
-                        <a href="index.html">
-                            <img src="~/Content/img/logo1.png" alt="Logo">
+                        <a href="@Url.Action("Index", "Home")">
+                            <img style="max-height: 60px" src="~/Content/img/logoNew-removebg-preview.png" alt="Logo">
                         </a>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="search">
+                    @*<div class="search">
                         <input type="text" placeholder="Search">
                         <button><i class="fa fa-search"></i></button>
-                    </div>
+                    </div>*@
                 </div>
                 <div class="col-md-3">
                     <div class="user">

@@ -114,3 +114,4 @@ D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\PayPal.xml
 D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\log4net.dll
 D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\log4net.xml
 D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\Rotativa.dll
+D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\obj\Debug\PVBClothing.csproj.AssemblyReference.cache

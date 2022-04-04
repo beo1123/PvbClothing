@@ -10,8 +10,8 @@
 <div class="breadcrumb-wrap">
     <div class="container-fluid">
         <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Products</a></li>
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Home</a></li>
+            <li class="breadcrumb-item"><a href="@Url.Action("ProductList", "Shop")">Products</a></li>
             <li class="breadcrumb-item active">Checkout</li>
         </ul>
     </div>
@@ -101,30 +101,31 @@
                 <div class="checkout-inner">
                     <div class="checkout-summary">
                         <h1>Cart Total</h1>
-                        <table cellpadding="5">
-                            <tr>
-                                <th width="80%">Product</th>
-                                <th width="20%" style="text-align: center; ">Total</th>
-                            </tr>
-                            @{
-                                int num = 1;
-                            }
-                            @foreach (var i in Model)
-                            {
+                        <table class="table">
+                            <table cellpadding="5">
                                 <tr>
-                                    <td>@num. @i.NameItem</td>
-                                    <td style=" position: relative; left: 11px;"><span>$ @String.Format("{0:0,0}", i.PriceTotal)</span></td>
+                                    <th width="80%">Product</th>
+                                    <th width="20%" style="text-align: center; ">Total</th>
                                 </tr>
-                                num++;
-                            }
+                                @{
+                                    int num = 1;
+                                }
+                                @foreach (var i in Model)
+                                {
+                                    <tr>
+                                        <td>@num. @i.NameItem</td>
+                                        <td style=" position: relative; left: 11px;"><span>$@String.Format("{0:0,0}", i.PriceTotal)</span></td>
+                                    </tr>
+                                    num++;
+                                }
 
-                        </table>
+                            </table>
 
-                        <h2>Grand Total<span>$@String.Format("{0:0,0}", ViewBag.totalPrice)</span></h2>
+                            <h2>Grand Total<span>$@String.Format("{0:0,0}", ViewBag.totalPrice)</span></h2>
 
                     </div>
 
-                   
+
                 </div>
             </div>
         </div>

@@ -14,6 +14,7 @@ namespace PVBClothing.Controllers
         PVBClothingEntities db = new PVBClothingEntities();
         public ActionResult ProductList()
         {
+
             return View();
         }
 

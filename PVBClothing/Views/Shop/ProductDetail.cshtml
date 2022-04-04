@@ -9,8 +9,8 @@
 <div class="breadcrumb-wrap">
     <div class="container-fluid">
         <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Products</a></li>
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Home</a></li>
+            <li class="breadcrumb-item"><a href="@Url.Action("ProductList", "Shop")">Products</a></li>
             <li class="breadcrumb-item active">Product Detail</li>
         </ul>
     </div>
@@ -69,7 +69,7 @@
                                     </div>
                                 </div>
                                 <div class="action">
-                                    <a class="btn" href="#"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+                                    <a class="btn" href="@Url.Action("AddToCart","Cart", new { id = Model.productId, @strURL = Request.Url.ToString()})"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
                                     <a class="btn" href="#"><i class="fa fa-shopping-bag"></i>Buy Now</a>
                                 </div>
                             </div>

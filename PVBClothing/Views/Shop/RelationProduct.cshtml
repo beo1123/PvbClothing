@@ -24,7 +24,7 @@
                     <img src="@Url.Content(item.image)" alt="Product Image">
                 </a>
                 <div class="product-action">
-                    <a href="#"><i class="fa fa-cart-plus"></i></a>
+                    <a href="@Url.Action("AddToCart","Cart", new { id = item.productId, @strURL = Request.Url.ToString()})"><i class="fa fa-cart-plus"></i></a>
                     <a href="#"><i class="fa fa-heart"></i></a>
                     <a href="@Url.Action("ProductDetail", "Shop", new { id = item.productId ,category = item.categoryId})"><i class="fa fa-search"></i></a>
                 </div>

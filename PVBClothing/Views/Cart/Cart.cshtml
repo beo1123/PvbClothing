@@ -92,8 +92,33 @@
                         <div class="col-md-12">
                             <div class="cart-summary">
                                 <div class="cart-content">
-                                    <h1>Cart Summary</h1>
-                                    <h2>Grand Total<span>$@String.Format("{0:0,0}", ViewBag.totalPrice)</span></h2>
+                                    <div class="checkout-inner">
+                                        <div class="checkout-summary">
+                                            <h1>Cart Total</h1>
+                                            <table cellpadding="5">
+                                                <tr>
+                                                    <th width="80%">Product</th>
+                                                    <th width="20%" style="text-align: center; ">Total</th>
+                                                </tr>
+                                                @{
+                                                    int num = 1;
+                                                }
+                                                @foreach (var i in Model)
+                                                {
+                                                    <tr>
+                                                        <td>@num. @i.NameItem</td>
+                                                        <td style=" position: relative; left: 11px;"><span>$@String.Format("{0:0,0}", i.PriceTotal)</span></td>
+                                                    </tr>
+                                                    num++;
+                                                }
+
+                                            </table>
+
+                                            <h2>Grand Total<span>$@String.Format("{0:0,0}", ViewBag.totalPrice)</span></h2>
+                                        </div>
+
+
+                                    </div>
                                 </div>
                                 <div class="cart-btn">
                                     @if (Session["info"] != null)
