@@ -53,6 +53,7 @@ D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\roslyn\VBCSCompiler.exe.c
 D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\Antlr3.Runtime.dll
 D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\EntityFramework.dll
 D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\EntityFramework.SqlServer.dll
+D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\log4net.dll
 D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\Microsoft.AspNet.Identity.Core.dll
 D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\Microsoft.AspNet.Identity.EntityFramework.dll
 D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\Microsoft.AspNet.Identity.Owin.dll
@@ -69,6 +70,10 @@ D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\Microsoft.Owin.Security.T
 D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\Microsoft.Web.Infrastructure.dll
 D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\Newtonsoft.Json.dll
 D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\Owin.dll
+D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\PagedList.dll
+D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\PagedList.Mvc.dll
+D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\PayPal.dll
+D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\Rotativa.dll
 D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\System.Web.Helpers.dll
 D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\System.Web.Mvc.dll
 D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\System.Web.Optimization.dll
@@ -77,6 +82,12 @@ D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\System.Web.WebPages.Deplo
 D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\System.Web.WebPages.dll
 D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\System.Web.WebPages.Razor.dll
 D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\WebGrease.dll
+D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\EntityFramework.xml
+D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\EntityFramework.SqlServer.xml
+D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\log4net.xml
+D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\PagedList.xml
+D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\PagedList.Mvc.xml
+D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\PayPal.xml
 D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\System.Web.Helpers.xml
 D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\System.Web.Mvc.xml
 D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\System.Web.Optimization.xml
@@ -86,8 +97,6 @@ D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\System.Web.WebPages.Deplo
 D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\System.Web.WebPages.Razor.xml
 D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\Newtonsoft.Json.xml
 D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\Antlr3.Runtime.pdb
-D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\EntityFramework.xml
-D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\EntityFramework.SqlServer.xml
 D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\Microsoft.AspNet.Identity.Core.xml
 D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\Microsoft.AspNet.Identity.Owin.xml
 D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\Microsoft.AspNet.Identity.EntityFramework.xml
@@ -105,13 +114,4 @@ D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\obj\Debug\PVBClothing.csproj.
 D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\obj\Debug\PVBClothing.csproj.CopyComplete
 D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\obj\Debug\PVBClothing.dll
 D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\obj\Debug\PVBClothing.pdb
-D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\PagedList.dll
-D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\PagedList.Mvc.dll
-D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\PagedList.xml
-D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\PagedList.Mvc.xml
-D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\PayPal.dll
-D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\PayPal.xml
-D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\log4net.dll
-D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\log4net.xml
-D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\bin\Rotativa.dll
 D:\LapTrinhWeb\DoAn LT_WEB\PVBClothing\PVBClothing\obj\Debug\PVBClothing.csproj.AssemblyReference.cache

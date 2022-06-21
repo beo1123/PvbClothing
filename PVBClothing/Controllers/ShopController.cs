@@ -25,7 +25,7 @@ namespace PVBClothing.Controllers
             if (searching != null)
             {
                 ViewBag.categories = categories;
-                var list = db.Products.Where(model => model.productName.Contains(searching) || searching == null && model.status == true).OrderByDescending(model => model.dateCreate).ToPagedList(pageNumber, pageSize);
+                var list = db.Products.Where(model => model.productName.Contains(searching)  && model.status == true).OrderByDescending(model => model.dateCreate).ToPagedList(pageNumber, pageSize);
                 return PartialView(list);
             }
             else
@@ -66,8 +66,12 @@ namespace PVBClothing.Controllers
             List<String> brand = new List<string>();
             foreach (Product i in this.db.Products)
             {
-                if (!brand.Contains(i.brand.Trim()))
-                    brand.Add(i.brand.Trim());
+                if (i.status == true)
+                {
+                    if (!brand.Contains(i.brand.Trim()))
+                        brand.Add(i.brand.Trim());
+                }
+                
             }
             return PartialView(brand);
         }
@@ -80,6 +84,7 @@ namespace PVBClothing.Controllers
             }
             var detail = db.Products.Where(model => model.productId == id).Single();
             ViewBag.NewPrice = detail.price - ((detail.price * detail.discount) / 100);
+            
             if (detail == null)
             {
                 return RedirectToAction("Error", "Home");

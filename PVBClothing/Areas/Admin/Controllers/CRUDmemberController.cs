@@ -21,7 +21,7 @@ namespace PVBClothing.Areas.Admin.Controllers
         {
             var pageNumber = page ?? 1;
             var pageSize = 10;
-            var member = db.Members.Where(model => model.userName.Contains(searching) || searching == null).OrderByDescending(model => model.RegisteredDate).Include(model => model.Role).ToPagedList(pageNumber, pageSize);
+            var member = db.Members.Where(model => model.userName.Contains(searching) || searching == null).OrderBy(model => model.RegisteredDate).Skip(1).Include(model => model.Role).ToPagedList(pageNumber, pageSize);
             return View(member);
         }
         //CREATE

@@ -196,16 +196,13 @@
     <Compile Include="Areas\Admin\Controllers\CRUDproductController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashBoardController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginMemberController.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Article.cs">
       <DependentUpon>PvbClothing.tt</DependentUpon>
     </Compile>
@@ -216,6 +213,7 @@
     <Compile Include="Models\Customer.cs">
       <DependentUpon>PvbClothing.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Encryptor.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Invoince.cs">
       <DependentUpon>PvbClothing.tt</DependentUpon>
@@ -223,12 +221,13 @@
     <Compile Include="Models\InvoinceDetail.cs">
       <DependentUpon>PvbClothing.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Member.cs">
       <DependentUpon>PvbClothing.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PaypalConfiguration.cs" />
-    <Compile Include="Models\PaypalLogger.cs" />
+    <Compile Include="Models\MoMo\MomoSecurity.cs" />
+    <Compile Include="Models\MoMo\PaymentRequest .cs" />
+    <Compile Include="Models\PayPal\PaypalConfiguration.cs" />
+    <Compile Include="Models\PayPal\PaypalLogger.cs" />
     <Compile Include="Models\Product.cs">
       <DependentUpon>PvbClothing.tt</DependentUpon>
     </Compile>
@@ -832,8 +831,6 @@
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\style1.css" />
     <Content Include="Content\css\WatchOrders.css" />
-    <Content Include="Content\img\avatar\avatar.jpg" />
-    <Content Include="Content\img\avatar\me1.jpg" />
     <Content Include="Content\img\bao.jpg" />
     <Content Include="Content\img\brand-1.png" />
     <Content Include="Content\img\brand-2.png" />
@@ -878,7 +875,6 @@
     <Content Include="Content\img\product\48957484_001_b.jpg" />
     <Content Include="Content\img\product\54296074_031_b.jpg" />
     <Content Include="Content\img\product\55150924_033_b.jpg" />
-    <Content Include="Content\img\product\56909161_014_b.jpg" />
     <Content Include="Content\img\product\56996697_001_b.jpg" />
     <Content Include="Content\img\product\58201609_001_b.jpg" />
     <Content Include="Content\img\product\58879487_001_b.jpg" />
@@ -1112,6 +1108,9 @@
     <Content Include="App_Browsers\qt.browser" />
     <Content Include="Areas\Admin\Views\CRUDinvoince\Index.cshtml" />
     <Content Include="Areas\Admin\Views\CRUDinvoince\InvoinceDetail.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\IISProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\IISProfile1.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

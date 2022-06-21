@@ -43,7 +43,7 @@ namespace PVBClothing.Areas.Admin.Controllers
                                 })).ToList();
             var test = getTopProduct;
 
-            // Đếm số lượng sản phẩm trong từng loại sản phẩm, thu được: (Đã đổ dữ liệu vào pie-chart)
+            // Đếm số lượng sản phẩm trong từng loại sản phẩm, thu được: 
             /*(tên loại sản phẩm - số lượng sản phẩm thuộc loại đó)*/
             var countProductOfCategory = (from c in db.ProductCategories
                                           join p in db.Products on c.categoryId equals p.categoryId into temp1

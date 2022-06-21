@@ -123,8 +123,8 @@ namespace PVBClothing.Controllers
                 var NewPassword = collection["NewPassword"]; // Mật khẩu mới
                 //var ConfirmPassword = collection["Confirm"];
 
-                CurrentPassword = CurrentPassword.Trim();
-                NewPassword = NewPassword.Trim();
+                CurrentPassword = Encryptor.MD5Hash(CurrentPassword.Trim()); 
+                NewPassword = Encryptor.MD5Hash(NewPassword.Trim());
 
                 var check = db.Members.Where(model => model.password == CurrentPassword && model.userName == member.userName).FirstOrDefault();
                 if (check != null)

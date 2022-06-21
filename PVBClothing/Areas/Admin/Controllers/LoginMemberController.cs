@@ -22,6 +22,7 @@ namespace PVBClothing.Areas.Admin.Controllers
         {
             var tk = collection["username"];
             var mk = collection["password"];
+            mk = Encryptor.MD5Hash(mk);
 
             var notMember = db.Members.Where(model => model.roleId == 3).SingleOrDefault(model => model.userName == tk && model.password == mk);
             var check = db.Members.Where(model => model.roleId == 1 || model.roleId == 2).SingleOrDefault(model => model.userName == tk && model.password == mk);

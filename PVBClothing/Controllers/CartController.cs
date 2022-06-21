@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using PVBClothing.Models;
 using PayPal.Api;
+using PVBClothing.Models.MoMo;
+using Newtonsoft.Json.Linq;
 
 namespace PVBClothing.Controllers
 {
@@ -210,7 +212,12 @@ namespace PVBClothing.Controllers
                 if (ModelState.IsValid)
                 {
                     Invoince bill = new Invoince();
-                    Member member = (Member)Session["info"]; // Lấy thông tin tài khoản từ session 
+                    Member member = (Member)Session["info"];
+
+
+                    // Lấy thông tin tài khoản từ session 
+
+
                     List<Cart> listCart = getCart();
                     bill.invoinceNo = CreateKey("HD");
                     bill.userName = member.userName;
@@ -231,14 +238,18 @@ namespace PVBClothing.Controllers
                     foreach (var item in listCart)
                     {
                         InvoinceDetail ctdh = new InvoinceDetail();
+
                         ctdh.invoinceNo = bill.invoinceNo;
                         ctdh.productId = item.IdItem;
                         ctdh.quanlityProduct = item.Quantity;
                         ctdh.unitPrice = item.unitPrice;
                         ctdh.totalPrice = (int?)(long)item.PriceTotal;
                         ctdh.totalDiscount = item.Discount * item.Quantity;
+
                         db.InvoinceDetails.Add(ctdh);
+
                     }
+
                     db.SaveChanges();
                     return RedirectToAction("SubmitBill", "Cart");
                 }
@@ -360,7 +371,7 @@ namespace PVBClothing.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        // Paypal 
+        #region paypal
         private Payment payment;
         private Payment CreatePayment(APIContext apiContext, string redirectUrl)
         {
@@ -516,6 +527,80 @@ namespace PVBClothing.Controllers
                 return RedirectToAction("SubmitBill", "Cart");
             }
         }
+        #endregion
+
+        #region momo
+        public ActionResult Payment()
+        {
+            //request params need to request to MoMo system
+            string endpoint = "https://test-payment.momo.vn/gw_payment/transactionProcessor";
+            string partnerCode = "MOMOEORL20220620";
+            string accessKey = "DeQiYQ0inrrkyvgU";
+            string serectkey = "FOVT9BPZ4u3KxAyzq2QMHAmxSDvPVImG";
+            string orderInfo = "test";
+            string returnUrl = "https://localhost:44397/Cart/ConfirmPaymentClient";
+            string notifyurl = "https://localhost:44397/Cart/SavePayment"; //lưu ý: notifyurl không được sử dụng localhost, có thể sử dụng ngrok để public localhost trong quá trình test
+
+            string amount = TotalPrice().ToString();
+            string orderid = DateTime.Now.Ticks.ToString();
+            string requestId = DateTime.Now.Ticks.ToString();
+            string extraData = "";
+
+            //Before sign HMAC SHA256 signature
+            string rawHash = "partnerCode=" +
+                partnerCode + "&accessKey=" +
+                accessKey + "&requestId=" +
+                requestId + "&amount=" +
+                amount + "&orderId=" +
+                orderid + "&orderInfo=" +
+                orderInfo + "&returnUrl=" +
+                returnUrl + "&notifyUrl=" +
+                notifyurl + "&extraData=" +
+                extraData;
+
+            MomoSecurity crypto = new MomoSecurity();
+            //sign signature SHA256
+            string signature = crypto.signSHA256(rawHash, serectkey);
+
+            //build body json request
+            JObject message = new JObject
+            {
+                { "partnerCode", partnerCode },
+                { "accessKey", accessKey },
+                { "requestId", requestId },
+                { "amount", amount },
+                { "orderId", orderid },
+                { "orderInfo", orderInfo },
+                { "returnUrl", returnUrl },
+                { "notifyUrl", notifyurl },
+                { "extraData", extraData },
+                { "requestType", "captureMoMoWallet" },
+                { "signature", signature }
+
+            };
+
+            string responseFromMomo = PaymentRequest.sendPaymentRequest(endpoint, message.ToString());
+
+            JObject jmessage = JObject.Parse(responseFromMomo);
+
+            return Redirect(jmessage.GetValue("payUrl").ToString());
+        }
+
+        //Khi thanh toán xong ở cổng thanh toán Momo, Momo sẽ trả về một số thông tin, trong đó có errorCode để check thông tin thanh toán
+        //errorCode = 0 : thanh toán thành công (Request.QueryString["errorCode"])
+        //Tham khảo bảng mã lỗi tại: https://developers.momo.vn/#/docs/aio/?id=b%e1%ba%a3ng-m%c3%a3-l%e1%bb%97i
+        public ActionResult ConfirmPaymentClient()
+        {
+            //hiển thị thông báo cho người dùng
+            return View();
+        }
+
+        [HttpPost]
+        public void SavePayment()
+        {
+            //cập nhật dữ liệu vào db
+        }
+        #endregion
 
     }
 }

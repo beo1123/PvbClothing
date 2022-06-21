@@ -11,9 +11,7 @@ namespace PVBClothing.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-
+    
     public partial class Member
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,34 +21,25 @@ namespace PVBClothing.Models
             this.Invoinces = new HashSet<Invoince>();
             this.Products = new HashSet<Product>();
         }
-
     
-
         public string userName { get; set; }
-        
         public string password { get; set; }
-       
         public string firstName { get; set; }
-
         public string lastName { get; set; }
         public string email { get; set; }
         public Nullable<System.DateTime> birthday { get; set; }
         public Nullable<bool> gender { get; set; }
-        
         public string phone { get; set; }
         public Nullable<System.DateTime> RegisteredDate { get; set; }
-        
         public string address { get; set; }
         public string avatar { get; set; }
         public Nullable<bool> status { get; set; }
-
         public int roleId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Article> Articles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Invoince> Invoinces { get; set; }
-        
         public virtual Role Role { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }

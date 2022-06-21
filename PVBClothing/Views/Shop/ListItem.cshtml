@@ -19,7 +19,7 @@
                 </div>
                 <div class="product-image">
                     <a href="#">
-                        <p><img src="@Url.Content(item.image)" alt="Product Image"></p>
+                        <p><img src="@Url.Content(item.image)"  alt="Product Image"></p>
                     </a>
                     <div class="product-action">
                         <a href="@Url.Action("AddToCart","Cart", new { id = item.productId, @strURL = Request.Url.ToString()})"><i class="fa fa-cart-plus"></i></a>
@@ -68,21 +68,5 @@
 
 
 
-<style>
-    .MenuTrang li {
-        display: inline;
-    }
-</style>
-<style type="text/css">
-    #mau-nut a {
-        clear: both;
-        background-color: orange;
-        color: snow;
-    }
 
-        #mau-nut a:hover {
-            background-color: darkcyan;
-            color: snow;
-        }
-</style>
 <!-- Pagination Start -->

@@ -36,7 +36,7 @@ namespace PVBClothing.Controllers
         {
             var tk = collection["username"];
             var mk = collection["password"];
-           // mk = Encryptor.MD5Hash(mk);
+            mk = Encryptor.MD5Hash(mk);
 
             if (ModelState.IsValid)
             {
@@ -51,16 +51,7 @@ namespace PVBClothing.Controllers
                 }
                 else
                 {
-                    /* if (!this.IsCaptchaValid(""))
-                     {
-                         ViewBag.captcha = "Captcha is not valid";
-                     }
-                     else
-                     {
-
-                     }*/
-                    
-                    //ViewBag.error = "Login failed, Check your username and password or create an account.";
+                   
                     return Json(new { msg = "There was a problem logging in. Check your username and password or create an account.", Url = "/User/Login" });
 
 
@@ -90,15 +81,7 @@ namespace PVBClothing.Controllers
         public ActionResult Register( Member member)
         {
             try
-            {/*
-                var confirmPassword = collection["confirmpassword"];
-
-                var userName = collection["email"];
-                var password = collection["password"];
-                var firstName = collection["firstname"];
-                var lastname = collection["lastname"];
-                var phone = collection["phone"];
-                var address = collection["address"];*/
+            {
 
                 if (ModelState.IsValid)
                 {
@@ -116,16 +99,11 @@ namespace PVBClothing.Controllers
                     }
                     else
                     {
-                        /*
-                        member.userName = userName;
-                        member.password = password;
-                        member.firstName = firstName;
-                        member.lastName = lastname;
-                        member.address = address;*/
-                        member.password = member.password;
+                        
+                        member.password = Encryptor.MD5Hash(member.password);
                         member.RegisteredDate = DateTime.Now;
                         member.roleId = 3;
-                        member.avatar = "~/Content/img/avatar/avatar.jpg";
+                        member.avatar = "~/Content/img/logo1.png";
                         member.status = true;
                         db.Members.Add(member);
                         var result = db.SaveChanges();
